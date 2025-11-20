@@ -10,13 +10,11 @@
       --panel-text: #fff;
       --accent: #f5d7aa;
     }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: #f3eee6;
@@ -24,13 +22,10 @@
       justify-content: center;
       padding: 16px;
     }
-
     .page {
       max-width: 1000px;
       width: 100%;
     }
-
-    /* Панель с музыкой и таймером над макетом */
     .top-panel {
       display: flex;
       flex-wrap: wrap;
@@ -45,20 +40,17 @@
       margin: 0 auto 10px;
       max-width: 700px;
     }
-
     .panel-left {
       display: flex;
       align-items: center;
       gap: 8px;
     }
-
     .panel-right {
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
     }
-
     .btn {
       border: none;
       border-radius: 999px;
@@ -69,86 +61,65 @@
       color: #3b332c;
       white-space: nowrap;
     }
-
     .countdown {
       display: flex;
       gap: 6px;
       font-size: 13px;
     }
-
     .count-item {
       padding: 4px 8px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.12);
     }
-
     .count-num {
       font-weight: 600;
       margin-right: 2px;
     }
-
-    /* Обёртка приглашения */
     .invite-wrapper {
       position: relative;
       max-width: 900px;
       margin: 0 auto;
     }
-
     .invite-image {
       width: 100%;
       display: block;
       height: auto;
     }
-
-    /* Прозрачные кликабельные зоны "Жми сюда" */
     .hotspot {
       position: absolute;
       display: block;
-      background: rgba(255, 0, 0, 0); 
+      /* Временно делаем зоны видимыми, чтобы было проще попасть */
+      background: rgba(0, 255, 0, 0.15);
+      border: 1px solid rgba(0, 128, 0, 0.6);
+      cursor: pointer;
     }
-
-    /* ПРИМЕРНЫЕ ПОЛОЖЕНИЯ КНОПОК.
-       При необходимости их можно подвинуть, изменяя значения top/left/width/height. */
-
     .hotspot-apt {
       top: 63%;
       left: 12%;
       width: 20%;
       height: 5%;
     }
-
     .hotspot-house {
       top: 63%;
       left: 40%;
       width: 20%;
       height: 5%;
     }
-
     .hotspot-hotel {
       top: 63%;
       left: 68%;
       width: 20%;
       height: 5%;
     }
-
     @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
-      .top-panel {
-        border-radius: 16px;
-      }
-      .countdown {
-        width: 100%;
-        justify-content: flex-start;
-      }
+      body { padding: 10px; }
+      .top-panel { border-radius: 16px; }
+      .countdown { width: 100%; justify-content: flex-start; }
     }
   </style>
 </head>
 <body>
   <div class="page">
-
-    <!-- Верхняя панель с музыкой и таймером -->
     <div class="top-panel">
       <div class="panel-left">
         🎵 <span>Включите плейлист нашего дня</span>
@@ -164,66 +135,55 @@
         </div>
       </div>
     </div>
-
-    <!-- Сам макет (картинка, сделанная из PDF) -->
     <div class="invite-wrapper">
       <img src="invite.png" alt="Приглашение на свадьбу" class="invite-image">
-
-      <!-- Прозрачные кликабельные области поверх "Жми сюда" -->
       <a
         class="hotspot hotspot-apt"
         href="https://www.avito.ru/cheboksary/kvartiry/sdam/posutochno/-ASgBAgICAkSSA8gQ8AeSUg?context=H4sIAAAAAAAA_wFbAKT_YToyOntzOjg6ImZyb21QYWdlIjtzOjE5OiJzZWFyY2hGb3JtV2lkZ2V0U1RSIjtzOjk6ImZyb21fcGFnZSI7czoxOToic2VhcmNoRm9ybVdpZGdldFNUUiI7ffdp9S9bAAAA&f=ASgBAgECBUSSA8gQ8AeSUqqDD5z58ALOpRa2xJYDpKwWytuWAwJFqC0feyJmcm9tIjoyMDI2MDgxNSwidG8iOjIwMjYwODE3fdDmFEQie1widmVyc2lvblwiOjEsXCJ0b3RhbENvdW50XCI6MixcImFkdWx0c0NvdW50XCI6MixcImNoaWxkcmVuXCI6W119Ig"
         target="_blank" rel="noopener"
       ></a>
-
       <a
         class="hotspot hotspot-house"
         href="https://www.avito.ru/cheboksary/doma_dachi_kottedzhi/sdam/dom/posutochno-ASgBAgICA0SUA9IQoAjKVdoI1lk?context=H4sIAAAAAAAA_wEjANz_YToxOntzOjg6ImZyb21QYWdlIjtzOjc6ImNhdGFsb2ciO312FITcIwAAAA&f=ASgBAQICA0SUA9IQoAjKVdoI1lkBQPbCDnT47JkChO2ZAoLtmQKA7ZkC_uyZAvzsmQL67JkC"
         target="_blank" rel="noopener"
       ></a>
-
       <a
         class="hotspot hotspot-hotel"
         href="https://xn--21-6kcaer3gp8f.xn--p1ai/hotel/"
         target="_blank" rel="noopener"
       ></a>
     </div>
-
-    <!-- Аудио -->
     <audio id="bg-music" src="music.mp3" loop></audio>
   </div>
-
   <script>
-    // Музыка
     const music = document.getElementById('bg-music');
     const toggleBtn = document.getElementById('music-toggle');
     let isPlaying = false;
-
-    toggleBtn.addEventListener('click', () => {
-      if (!music) return;
-      if (!isPlaying) {
-        music.play().catch(() => {});
-        isPlaying = true;
-        toggleBtn.textContent = 'Остановить музыку';
-      } else {
-        music.pause();
-        isPlaying = false;
-        toggleBtn.textContent = 'Включить музыку';
-      }
-    });
-
-    // Таймер до свадьбы
+    if (toggleBtn && music) {
+      toggleBtn.addEventListener('click', () => {
+        if (!isPlaying) {
+          music.play().then(() => {
+            isPlaying = true;
+            toggleBtn.textContent = 'Остановить музыку';
+          }).catch(() => {
+            alert('Браузер заблокировал автозапуск. Попробуйте ещё раз или включите звук/разрешите запуск медиа.');
+          });
+        } else {
+          music.pause();
+          isPlaying = false;
+          toggleBtn.textContent = 'Включить музыку';
+        }
+      });
+    }
     const targetDate = new Date('2026-08-16T15:30:00+03:00').getTime();
-
     function updateCountdown() {
       const now = new Date().getTime();
       const distance = targetDate - now;
-
       const d = document.getElementById('days');
       const h = document.getElementById('hours');
       const m = document.getElementById('minutes');
       const s = document.getElementById('seconds');
-
+      if (!d || !h || !m || !s) return;
       if (distance <= 0) {
         d.textContent = 0;
         h.textContent = 0;
@@ -231,18 +191,15 @@
         s.textContent = 0;
         return;
       }
-
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((distance / (1000 * 60)) % 60);
       const seconds = Math.floor((distance / 1000) % 60);
-
       d.textContent = days;
       h.textContent = hours;
       m.textContent = minutes;
       s.textContent = seconds;
     }
-
     updateCountdown();
     setInterval(updateCountdown, 1000);
   </script>
